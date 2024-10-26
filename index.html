@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>คำอวยพรงานแต่งงาน</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #fff5e1;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      .container {
+        background-color: #ffe5e0;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 90%;
+        max-width: 500px;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .title {
+        font-size: 2em;
+        color: #ff69b4;
+        margin-bottom: 10px;
+      }
+
+      h1 {
+        color: #ff7f50;
+      }
+
+      label {
+        font-size: 1.1em;
+        color: #ff69b4;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 15px;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 1em;
+        box-sizing: border-box;
+      }
+
+      .thank-you {
+        font-size: 1.1em;
+        color: #ff7f50;
+        margin-bottom: 15px;
+      }
+
+      button {
+        background-color: #ff7f50;
+        color: white;
+        font-size: 1.1em;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #ff4500;
+      }
+    </style>
+    <script>
+      async function submitForm(event) {
+        event.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const message = document.getElementById("message").value;
+
+        const response = await fetch("AKfycbxhRWSCvkWicsEEZQBW2ip-4VUrKvX_fN-XmraajetxekMoJ4nHdZQABizzpjy4Weyk", {
+          // แทนที่ด้วย URL ของ Google Apps Script
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, message }),
+        });
+
+        if (response.ok) {
+          alert("ส่งคำอวยพรเรียบร้อยแล้ว!");
+          window.location.href = "thankyou.html";
+        } else {
+          alert("มีข้อผิดพลาด กรุณาลองอีกครั้ง");
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="title">รุ้ง ♥ โอ๊ต</div>
+      <h1>ร่วมเขียนคำอวยพร</h1>
+      <form onsubmit="submitForm(event)">
+        <label for="name">ชื่อของคุณ:</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="message">คำอวยพร:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
+
+        <div class="thank-you">ขอขอบคุณที่มาร่วมยินดีกับเรา</div>
+
+        <button type="submit">ส่งคำอวยพร</button>
+      </form>
+    </div>
+  </body>
+</html>

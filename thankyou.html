@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>คำอวยพรจากผู้ร่วมยินดี</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #fff5e1;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        margin: 0;
+      }
+      .title {
+        font-size: 1.8em;
+        color: #ff69b4;
+        margin-bottom: 10px;
+      }
+      .thank-you {
+        font-size: 1.2em;
+        color: #ff7f50;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+      .message-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        max-width: 600px;
+        width: 100%;
+      }
+      .message-box {
+        background-color: #ffe5e0;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        position: relative;
+      }
+      .message-text {
+        font-size: 1.1em;
+        color: #333;
+        margin-bottom: 15px;
+      }
+      .message-name {
+        font-size: 1em;
+        color: #ff69b4;
+        text-align: right;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="title">ขอบคุณที่มาร่วมแสดงความยินดีกับเรา ^^</div>
+    <div class="thank-you">คำอวยพรจากใจคุณ</div>
+    <div id="messageContainer" class="message-container"></div>
+
+    <script>
+      async function loadMessages() {
+        const response = await fetch("AKfycbxhRWSCvkWicsEEZQBW2ip-4VUrKvX_fN-XmraajetxekMoJ4nHdZQABizzpjy4Weyk");
+        const messages = await response.json();
+
+        const messageContainer = document.getElementById("messageContainer");
+
+        messages.forEach((msg) => {
+          const messageBox = document.createElement("div");
+          messageBox.className = "message-box";
+
+          const messageText = document.createElement("div");
+          messageText.className = "message-text";
+          messageText.innerText = msg.message;
+
+          const messageName = document.createElement("div");
+          messageName.className = "message-name";
+          messageName.innerText = `- ${msg.name}`;
+
+          messageBox.appendChild(messageText);
+          messageBox.appendChild(messageName);
+          messageContainer.appendChild(messageBox);
+        });
+      }
+
+      loadMessages();
+    </script>
+  </body>
+</html>
